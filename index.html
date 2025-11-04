@@ -1,164 +1,1155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <title>Assil Belhaj | Full-Stack, DevOps & AI</title>
+  <title>Assil Belhaj | Full-Stack · DevOps · AI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Assil Belhaj, full-stack developer in training, DevOps & AI enthusiast." />
+  <meta name="color-scheme" content="dark light" />
   <style>
+    :root {
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --bg-card: #020617;
+      --bg-soft: radial-gradient(circle at top left, #0f172a 0, transparent 55%),
+                 radial-gradient(circle at bottom right, #0b1120 0, transparent 60%),
+                 #020617;
+      --fg: #e5e7eb;
+      --fg-muted: #9ca3af;
+      --accent: #22d3ee;           /* cyan */
+      --accent-alt: #a855f7;       /* purple */
+      --accent-soft: rgba(34, 211, 238, 0.16);
+      --border: #1f2937;
+      --shadow-strong: 0 26px 70px rgba(0, 0, 0, 0.9);
+      --radius-lg: 18px;
+      --radius-full: 999px;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f7ff;
+      --bg-elevated: #ffffff;
+      --bg-card: #ffffff;
+      --bg-soft: radial-gradient(circle at top left, #e0f2fe 0, transparent 55%),
+                 radial-gradient(circle at bottom right, #ede9fe 0, transparent 60%),
+                 #f5f7ff;
+      --fg: #020617;
+      --fg-muted: #4b5563;
+      --accent: #0ea5e9;
+      --accent-alt: #6366f1;
+      --accent-soft: rgba(14, 165, 233, 0.12);
+      --border: #e5e7eb;
+      --shadow-strong: 0 18px 45px rgba(15, 23, 42, 0.18);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; background:#0d1117; color:#e6edf3; }
-    a { color:#58a6ff; text-decoration: none; }
-    header { padding: 3rem 1.5rem; text-align: center; background:#010409; border-bottom:1px solid #30363d; }
-    header h1 { font-size: 2.2rem; margin-bottom: .5rem; }
-    header p { opacity:.85; }
-    .tagline { margin-top:.6rem; font-size:.95rem; color:#8b949e; }
-    .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
-    section { margin-bottom: 2.5rem; }
-    h2 { font-size: 1.4rem; margin-bottom: 1rem; border-bottom:1px solid #30363d; padding-bottom:.4rem; }
-    .grid { display: grid; gap: 1rem; }
-    @media(min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    .card { border:1px solid #30363d; border-radius: .6rem; padding: 1rem 1.2rem; background:#161b22; }
-    .pill { display:inline-block; padding:.25rem .55rem; border-radius:999px; background:#161b22; border:1px solid #30363d; font-size:.8rem; margin:.15rem; }
-    ul { margin-left:1.2rem; margin-top:.5rem; }
-    li { margin-bottom:.35rem; }
-    .sub { font-size:.9rem; color:#8b949e; }
-    footer { text-align:center; padding:1.5rem; font-size:.85rem; color:#8b949e; border-top:1px solid #30363d; background:#010409; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height: 1.6;
+      background: var(--bg-soft);
+      color: var(--fg);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Animated background glow */
+    .bg-orbit {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(34,211,238,0.16), transparent 55%),
+        radial-gradient(circle at 80% 80%, rgba(168,85,247,0.18), transparent 55%);
+      animation: orbit 26s linear infinite alternate;
+    }
+
+    @keyframes orbit {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(-40px, 30px, 0) scale(1.08); }
+    }
+
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 1.25rem 1.25rem 3rem;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.96), rgba(2,6,23,0.9));
+      border-bottom: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .navbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1.25rem;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: conic-gradient(from 180deg, #22d3ee, #a855f7, #22d3ee);
+      box-shadow: 0 0 0 1px rgba(148,163,184,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #020617;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .brand-role {
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 0.3rem 0;
+      color: var(--fg-muted);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 100%;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #22d3ee, #a855f7);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(34,211,238,0.4);
+      background: radial-gradient(circle at 0% 0%, rgba(34,211,238,0.18), transparent 60%);
+      color: var(--fg);
+      font-size: 0.8rem;
+      font-weight: 500;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.7);
+    }
+
+    .nav-cta span:last-child {
+      font-size: 0.9rem;
+    }
+
+    .theme-toggle {
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.95);
+      color: var(--fg);
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 720px) {
+      .navbar-inner {
+        padding-inline: 0.75rem;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      gap: 1.8rem;
+      padding: 2.5rem 0 2.2rem;
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.1fr);
+      }
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--fg-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-kicker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34,197,94,0.3);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 2.9vw, 2.7rem);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #22d3ee, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: var(--fg-muted);
+      max-width: 40rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--fg-muted);
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.75rem;
+      border-radius: var(--radius-full);
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.45);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      border-radius: var(--radius-full);
+      border: none;
+      padding: 0.65rem 1.3rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #020617;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22d3ee, #a855f7);
+      box-shadow: var(--shadow-strong);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-secondary {
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 0.6rem 1.2rem;
+      font-size: 0.88rem;
+      color: var(--fg);
+      background: rgba(15,23,42,0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .hero-right {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(34,211,238,0.3), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(168,85,247,0.3), transparent 55%),
+        #020617;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 1.3rem 1.3rem 1rem;
+      box-shadow: var(--shadow-strong);
+      max-width: 320px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background: conic-gradient(from 180deg, rgba(34,211,238,0.4), rgba(168,85,247,0.4), transparent, transparent);
+      opacity: 0.1;
+      mix-blend-mode: screen;
+      animation: spin 22s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-avatar-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 32px;
+      object-fit: cover;
+      border: 2px solid rgba(248,250,252,0.9);
+      box-shadow: 0 24px 45px rgba(0,0,0,0.9);
+      background: #020617;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-card-name {
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-role {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      margin-bottom: 0.6rem;
+      color: var(--fg-muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-row span:first-child {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    .hero-card-footer {
+      margin-top: 0.4rem;
+      border-top: 1px dashed rgba(148,163,184,0.5);
+      padding-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34,197,94,0.3);
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 2.8rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .section-divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, rgba(34,211,238,0.9), rgba(168,85,247,0.2), transparent);
+      margin-top: 0.35rem;
+    }
+
+    .section-body {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+    }
+
+    /* CARDS & GRID */
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.96);
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.85);
+      position: relative;
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(34,211,238,0.22), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 60px rgba(0,0,0,0.95);
+      border-color: rgba(34,211,238,0.6);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .card-sub {
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.12rem 0.55rem;
+      border-radius: var(--radius-full);
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.45);
+      font-size: 0.72rem;
+      color: var(--fg-muted);
+    }
+
+    ul { margin-left: 1.1rem; margin-top: 0.4rem; }
+    li { margin-bottom: 0.25rem; }
+
+    /* TIMELINE */
+    .timeline {
+      position: relative;
+      padding-left: 1.1rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.2rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, #22d3ee, transparent);
+      opacity: 0.9;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.3rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -1px;
+      top: 0.35rem;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #a855f7;
+      box-shadow: 0 0 0 5px rgba(168,85,247,0.3);
+    }
+
+    .timeline-body {
+      padding: 0.35rem 0 0.1rem 0.85rem;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .timeline-meta {
+      font-size: 0.78rem;
+      color: var(--fg-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 720px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      }
+    }
+
+    .contact-list {
+      font-size: 0.9rem;
+      color: var(--fg-muted);
+    }
+
+    .contact-row {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--fg-muted);
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .chip {
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 0.74rem;
+      padding: 0.22rem 0.65rem;
+      color: var(--fg-muted);
+      background: rgba(15,23,42,0.96);
+    }
+
+    .copy-btn {
+      margin-top: 0.5rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148,163,184,0.8);
+      background: rgba(15,23,42,0.98);
+      color: var(--fg);
+      font-size: 0.8rem;
+      padding: 0.35rem 0.8rem;
+      cursor: pointer;
+    }
+
+    .copy-btn.copied {
+      border-color: #22c55e;
+      color: #22c55e;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 1.6rem 0.75rem 2.4rem;
+      font-size: 0.8rem;
+      color: var(--fg-muted);
+    }
+
+    /* SCROLL TOP */
+    .scroll-top {
+      position: fixed;
+      right: 1.3rem;
+      bottom: 1.4rem;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148,163,184,0.7);
+      background: radial-gradient(circle at 0 0, rgba(34,211,238,0.3), rgba(5,8,22,0.98));
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.95);
+      z-index: 50;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* REVEAL ANIMATIONS */
+    [data-scroll] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    [data-scroll].in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Assil Belhaj</h1>
-    <p>Full-Stack Developer in training · DevOps & AI Enthusiast</p>
-    <p class="tagline">
-      Building modern web apps, experimenting with AI, and learning to ship reliably with DevOps & cloud.
-    </p>
-    <p style="margin-top:1rem;">
-      <a href="mailto:assilbelhaj12@gmail.com">assilbelhaj12@gmail.com</a> ·
-      <a href="https://github.com/assilbelhaj" target="_blank">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/assil-belhaj-305110262" target="_blank">LinkedIn</a>
-    </p>
-  </header>
+  <div class="bg-orbit"></div>
 
-  <main class="container">
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">
+        <div class="brand-mark">AB</div>
+        <div class="brand-text">
+          <span class="brand-name">Assil Belhaj</span>
+          <span class="brand-role">Full-Stack · DevOps · AI</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <span>Let’s talk</span> <span>↗</span>
+        </button>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme" data-theme-toggle>☾</button>
+      </div>
+    </div>
+  </nav>
 
-    <section>
-      <h2>About</h2>
-      <p>
-        I’m an engineering student in web technologies at <strong>ESPRIT</strong>, specialized in
-        <strong>full-stack development</strong>, <strong>DevOps</strong> and <strong>applied AI</strong>.
-        I enjoy turning ideas into working products, from UI to backend and deployment, while following
-        good practices in security, testing and cloud.
-      </p>
+  <div class="page-shell">
+    <!-- HERO -->
+    <header class="hero" id="top" data-scroll>
+      <div>
+        <div class="hero-kicker">
+          <span class="hero-kicker-dot"></span>
+          <span>Engineering student · Tunisia</span>
+        </div>
+        <h1 class="hero-title">
+          Building <span>reliable web & AI systems</span> with a DevOps mindset.
+        </h1>
+        <p class="hero-subtitle">
+          I’m an engineering student in web technologies at <strong>ESPRIT</strong>, focused on
+          <strong>full-stack development</strong>, <strong>DevOps practices</strong> and
+          <strong>applied AI</strong> (recommendation, face & emotion detection). I like taking a product from
+          idea to deployment, with clean code, security, and user experience in mind.
+        </p>
+        <div class="hero-meta">
+          <div class="meta-pill">📍 Based in Tunisia</div>
+          <div class="meta-pill">🎯 DevOps · AI · Full-stack</div>
+          <div class="meta-pill">⚙ TypeScript · Node.js · React</div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" type="button" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+            View projects <span>↓</span>
+          </button>
+          <button class="btn-secondary" type="button" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Contact me
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-card">
+          <div class="hero-avatar-wrap">
+            <img src="monimage.jpg" alt="Portrait of Assil Belhaj" class="hero-avatar" loading="lazy">
+          </div>
+          <div class="hero-card-name">Assil Belhaj</div>
+          <div class="hero-card-role">Full-Stack · DevOps · AI</div>
+          <div class="hero-card-row">
+            <span>Focus</span>
+            <span>TypeScript · Node.js · React · AWS</span>
+          </div>
+          <div class="hero-card-row">
+            <span>Strengths</span>
+            <span>Learning fast, shipping clean, serious & reliable</span>
+          </div>
+          <div class="hero-card-footer">
+            <div style="display:flex;align-items:center;gap:0.4rem;">
+              <span class="hero-status-dot"></span>
+              <span>Open to internships</span>
+            </div>
+            <span style="font-size:0.76rem;color:var(--fg-muted);">Last update <span id="year-mini"></span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="section" id="about" data-scroll>
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Profile</div>
+          <div class="section-title">About me</div>
+          <div class="section-divider"></div>
+        </div>
+      </div>
+      <div class="section-body">
+        I’m currently in the <strong>cycle ingénieur en technologies web</strong> at <strong>ESPRIT</strong>.
+        Through my internships and personal projects, I’ve worked on:
+        <ul>
+          <li>Designing and building <strong>LMS platforms</strong> with modern frontends and Node.js backends.</li>
+          <li>Integrating <strong>AI features</strong> such as chatbots, PDF summarization, recommendation systems, face & emotion recognition.</li>
+          <li>Applying <strong>DevOps good practices</strong>: containers, security, automation and quality tooling.</li>
+        </ul>
+        I like serious, professional environments, clear expectations, and teams that care about code quality and impact.
+      </div>
     </section>
 
-    <section>
-      <h2>Skills</h2>
+    <!-- SKILLS -->
+    <section class="section" id="skills" data-scroll>
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Stack</div>
+          <div class="section-title">Skills & technologies</div>
+          <div class="section-divider"></div>
+        </div>
+      </div>
       <div class="grid grid-2">
-        <div class="card">
-          <h3>Languages & Frameworks</h3>
-          <p class="sub">TypeScript, Node.js, React, Angular, Next.js, Nest.js, Java, Spring Boot, .NET, Symfony, PHP, C/C++, HTML/CSS, WordPress</p>
+        <article class="card">
+          <div class="card-title">Languages & Frameworks</div>
+          <p class="card-sub">
+            TypeScript, Node.js, React, Angular, Next.js, Nest.js, Java, Spring Boot, .NET, Symfony, PHP, C/C++, HTML/CSS, WordPress
+          </p>
+          <div class="pill-row">
+            <span class="pill">Full-stack TypeScript</span>
+            <span class="pill">React / Next.js</span>
+            <span class="pill">Node.js / Express</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">DevOps & Tools</div>
+          <p class="card-sub">
+            Git/GitHub, Docker, Jenkins, SonarQube, Nexus, Postman, Swagger, Trello, Jira
+          </p>
+          <div class="pill-row">
+            <span class="pill">CI/CD basics</span>
+            <span class="pill">Code quality</span>
+            <span class="pill">API testing</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">AI & Machine Learning</div>
+          <p class="card-sub">
+            Predictive models, data processing, recommendation, face recognition, emotion detection, Python (notions), TensorFlow/Keras (bases)
+          </p>
+          <div class="pill-row">
+            <span class="pill">Recommender systems</span>
+            <span class="pill">Computer vision (faces)</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">Cloud & Databases</div>
+          <p class="card-sub">
+            AWS (EC2, S3, IAM, VPC basics), MongoDB, MySQL, Oracle (PL/SQL), NoSQL concepts
+          </p>
+          <div class="pill-row">
+            <span class="pill">AWS Cloud Foundations</span>
+            <span class="pill">MongoDB</span>
+            <span class="pill">Relational & NoSQL</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects" data-scroll>
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Selected work</div>
+          <div class="section-title">Highlighted projects</div>
+          <div class="section-divider"></div>
         </div>
-        <div class="card">
-          <h3>DevOps & Tools</h3>
-          <p class="sub">Git/GitHub, Docker, Jenkins, SonarQube, Nexus, Postman, Swagger, Trello, Jira</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-title">EduNova — Innovative LMS Platform</div>
+          <div class="card-sub">
+            2024 – 2025 · React/TypeScript · Node.js (Express) · MongoDB · Docker · WebSockets · DevOps
+          </div>
+          <ul>
+            <li>Built an interactive LMS with a modern TypeScript stack and smooth user experience.</li>
+            <li>Integrated <strong>Google Classroom</strong> &amp; <strong>Blackboard</strong> (OAuth) with advanced course and lesson management.</li>
+            <li>Added real-time sync with <strong>WebSockets</strong> and containerized the app with <strong>Docker</strong>.</li>
+            <li>Implemented a <strong>from-scratch recommendation engine</strong> to personalize learner journeys.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Full-stack</span>
+            <span class="pill">DevOps</span>
+            <span class="pill">Recommendation AI</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">LMS for Longevity Plus (Techclerks)</div>
+          <div class="card-sub">
+            2025 · React/TypeScript · Node.js/Express · MongoDB · AI · Security · Agile/Scrum
+          </div>
+          <ul>
+            <li>Designed and developed a full-stack LMS for a coaching &amp; training company.</li>
+            <li>Implemented AI features: assistant chatbot, <strong>PDF summarization</strong>, video calls with <strong>face &amp; emotion recognition</strong>.</li>
+            <li>Added an intelligent calendar and enforced <strong>security best practices</strong> (JWT, RBAC, validation, rate limiting, audit logs).</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Applied AI</span>
+            <span class="pill">Security-first</span>
+            <span class="pill">LMS</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience" data-scroll>
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Career</div>
+          <div class="section-title">Experience</div>
+          <div class="section-divider"></div>
         </div>
-        <div class="card">
-          <h3>AI & Machine Learning</h3>
-          <p class="sub">Predictive models, data processing, face recognition, emotion detection, recommendation systems, Python (notions), TensorFlow/Keras (bases)</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-title">Techclerks — Summer Intern</div>
+            <div class="timeline-meta">Jun 2025 – Aug 2025 · Full-stack &amp; AI</div>
+            <ul>
+              <li>Full-stack development of an LMS with AI features and security best practices.</li>
+              <li>Worked in Agile/Scrum, from feature planning to deployment.</li>
+            </ul>
+          </div>
         </div>
-        <div class="card">
-          <h3>Cloud & Databases</h3>
-          <p class="sub">AWS (EC2, S3, IAM, VPC basics), MongoDB, MySQL, Oracle (PL/SQL), NoSQL concepts</p>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-title">Hero Labs — Frontend Intern</div>
+            <div class="timeline-meta">Jul 2024 – Aug 2024 · Frontend</div>
+            <ul>
+              <li>Developed user-friendly interfaces in Next.js &amp; TypeScript.</li>
+              <li>Created reusable components and contributed to code quality via reviews.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <div class="timeline-title">ATT — Agence Technique des Télécommunications</div>
+            <div class="timeline-meta">Jun 2022 – Jul 2022 · Data &amp; systems</div>
+            <ul>
+              <li>Assisted engineers with mission data analysis and system performance evaluations.</li>
+              <li>Contributed to technical mission reports in an international organizational environment.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2>Highlighted Projects</h2>
-
-      <div class="card">
-        <h3>EduNova — Innovative LMS Platform</h3>
-        <p class="sub">2024 – 2025 · React/TypeScript · Node.js (Express) · MongoDB · Docker · WebSockets · DevOps</p>
-        <ul>
-          <li>Built an interactive LMS with modern UX and a full TypeScript stack.</li>
-          <li>Integrated Google Classroom & Blackboard (OAuth) with advanced course and lesson management.</li>
-          <li>Added real-time sync with WebSockets and containerized the app with Docker following DevOps good practices.</li>
-          <li>Implemented a from-scratch recommendation engine to personalize learner experience.</li>
-        </ul>
+    <!-- EDUCATION / CERTIFICATIONS -->
+    <section class="section" id="education" data-scroll>
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Background</div>
+          <div class="section-title">Education & certifications</div>
+          <div class="section-divider"></div>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>LMS for Longevity Plus (Techclerks internship)</h3>
-        <p class="sub">2025 · React/TypeScript · Node.js/Express · MongoDB · AI · Security · Agile/Scrum</p>
-        <ul>
-          <li>Designed and developed a full-stack LMS for a coaching & training company.</li>
-          <li>Implemented AI features: assistant chatbot, PDF summarization, video calls with face recognition and emotion detection.</li>
-          <li>Added an intelligent calendar and enforced security best practices (JWT, RBAC, validation, rate limiting, audit logs).</li>
-        </ul>
-      </div>
-    </section>
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-title">Education</div>
+          <ul>
+            <li><strong>Cycle ingénieur en technologies web</strong> — ESPRIT (2021 – Present)</li>
+            <li><strong>Baccalauréat Mathématiques</strong> — Lycée El Menzah 6 (2021)</li>
+          </ul>
+        </article>
 
-    <section>
-      <h2>Experience</h2>
-
-      <div class="card">
-        <h3>Techclerks — Summer Intern</h3>
-        <p class="sub">Jun 2025 – Aug 2025</p>
-        <ul>
-          <li>Full-stack development of an LMS with AI features and security best practices.</li>
-          <li>Worked in Agile/Scrum, from feature planning to deployment.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Hero Labs — Frontend Intern</h3>
-        <p class="sub">Jul 2024 – Aug 2024</p>
-        <ul>
-          <li>Developed user-friendly interfaces in Next.js & TypeScript.</li>
-          <li>Created reusable components and contributed to code quality through reviews.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>ATT — Agence Technique des Télécommunications</h3>
-        <p class="sub">Jun 2022 – Jul 2022</p>
-        <ul>
-          <li>Assisted engineers with mission data analysis and system performance evaluation.</li>
-          <li>Contributed to technical reports in an international organizational environment.</li>
-        </ul>
+        <article class="card">
+          <div class="card-title">Certifications</div>
+          <ul>
+            <li>AWS Academy Graduate — Cloud Foundations (2025)</li>
+            <li>Blockchain Essentials — IBM Skills Network (2025)</li>
+            <li>CCNA: Switching, Routing and Wireless Essentials (SRWE) — Cisco (2024)</li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <section>
-      <h2>Education & Certifications</h2>
-      <div class="card">
-        <ul>
-          <li><strong>Cycle ingénieur en technologies web</strong> – ESPRIT (2021 – Present)</li>
-          <li><strong>Baccalauréat Mathématiques</strong> – Lycée El Menzah 6 (2021)</li>
-          <li>AWS Academy Graduate — Cloud Foundations (2025)</li>
-          <li>Blockchain Essentials — IBM Skills Network (2025)</li>
-          <li>CCNA: Switching, Routing and Wireless Essentials (SRWE) — Cisco (2024)</li>
-        </ul>
+    <!-- CONTACT -->
+    <section class="section" id="contact" data-scroll>
+      <div class="section-header">
+        <div>
+          <div class="section-tag">Contact</div>
+          <div class="section-title">Let’s work together</div>
+          <div class="section-divider"></div>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card contact-list">
+          <div class="contact-row">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">📧 <a href="mailto:assilbelhaj12@gmail.com">assilbelhaj12@gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">🐙 <a href="https://github.com/assilbelhaj" target="_blank">github.com/assilbelhaj</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">💼 <a href="https://www.linkedin.com/in/assil-belhaj-305110262" target="_blank">assil-belhaj</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Languages</div>
+            <div class="contact-value">Arabe (native) · Français (B2) · Anglais (B2)</div>
+          </div>
+
+          <button class="copy-btn" type="button" id="copy-email-btn">Copy email</button>
+
+          <div class="chip-row">
+            <span class="chip">Full-Stack</span>
+            <span class="chip">DevOps</span>
+            <span class="chip">AI projects</span>
+            <span class="chip">Serious & motivated</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">What I’m looking for</div>
+          <p style="font-size:0.88rem;color:var(--fg-muted);margin-top:0.3rem;">
+            I’m interested in:
+          </p>
+          <ul style="margin-top:0.4rem;">
+            <li>Internships or junior roles in <strong>DevOps</strong>, <strong>backend</strong>, or <strong>full-stack TypeScript</strong>.</li>
+            <li>Teams building products with strong <strong>engineering culture</strong> and high standards.</li>
+            <li>Projects involving <strong>AI in real products</strong> (LMS, recommendation, CV, computer vision).</li>
+          </ul>
+          <p style="font-size:0.86rem;color:var(--fg-muted);margin-top:0.7rem;">
+            If you think my profile could match your needs, feel free to reach out. I answer seriously and quickly.
+          </p>
+        </div>
       </div>
     </section>
-
-    <section>
-      <h2>Contact</h2>
-      <p>
-        📧 <a href="mailto:assilbelhaj12@gmail.com">assilbelhaj12@gmail.com</a><br />
-        💼 <a href="https://www.linkedin.com/in/assil-belhaj-305110262" target="_blank">LinkedIn</a><br />
-        🐙 <a href="https://github.com/assilbelhaj" target="_blank">GitHub</a>
-      </p>
-    </section>
-
-  </main>
+  </div>
 
   <footer>
-    © <span id="year"></span> · Built with ❤️ by Assil Belhaj
+    © <span id="year"></span> · Built with care by Assil Belhaj
   </footer>
 
+  <button class="scroll-top" type="button" id="scroll-top" aria-label="Scroll to top">↑</button>
+
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Year
+    const yearSpan = document.getElementById('year');
+    const yearMini = document.getElementById('year-mini');
+    const currentYear = new Date().getFullYear();
+    if (yearSpan) yearSpan.textContent = currentYear;
+    if (yearMini) yearMini.textContent = currentYear;
+
+    // Theme
+    (function() {
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored) root.setAttribute('data-theme', stored);
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const updateIcon = () => {
+        if (!toggle) return;
+        toggle.textContent = root.getAttribute('data-theme') === 'light' ? '☀' : '☾';
+      };
+      updateIcon();
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const current = root.getAttribute('data-theme') || 'dark';
+          const next = current === 'dark' ? 'light' : 'dark';
+          root.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          updateIcon();
+        });
+      }
+    })();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-scroll]').forEach(el => observer.observe(el));
+
+    // Active nav link
+    const sections = document.querySelectorAll('section[id], header.hero');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const setActive = (id) => {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href') || '';
+        if (href.endsWith('#' + id)) link.classList.add('active');
+        else link.classList.remove('active');
+      });
+    };
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id || 'about');
+        }
+      });
+    }, { threshold: 0.35 });
+    sections.forEach(sec => sectionObserver.observe(sec));
+
+    // Scroll to top
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      if (!scrollBtn) return;
+      if (window.scrollY > 260) scrollBtn.classList.add('visible');
+      else scrollBtn.classList.remove('visible');
+    });
+    if (scrollBtn) {
+      scrollBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    // Copy email
+    const copyBtn = document.getElementById('copy-email-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('assilbelhaj12@gmail.com');
+          copyBtn.classList.add('copied');
+          copyBtn.textContent = 'Email copied ✔';
+          setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            copyBtn.textContent = 'Copy email';
+          }, 1600);
+        } catch (e) {
+          copyBtn.textContent = 'Copy failed';
+        }
+      });
+    }
   </script>
 </body>
 </html>
